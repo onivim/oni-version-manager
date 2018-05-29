@@ -25,8 +25,13 @@
   },
   "dependencies": {
     "@types/mkdirp": "^0.5.2",
+    "@types/request": "^2.47.0",
+    "@types/request-promise-native": "^1.0.14",
     "github-releases": "^0.4.1",
     "minimist": "^1.2.0",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "request": "^2.87.0",
+    "request-progress": "^3.0.0",
+    "request-promise-native": "^1.0.5"
   }
 }
