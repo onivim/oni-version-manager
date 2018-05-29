@@ -24,9 +24,11 @@
     "typescript": "^2.8.3"
   },
   "dependencies": {
+    "@types/extract-zip": "^1.6.2",
     "@types/mkdirp": "^0.5.2",
     "@types/request": "^2.47.0",
     "@types/request-promise-native": "^1.0.14",
+    "extract-zip": "^1.6.7",
     "github-releases": "^0.4.1",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",

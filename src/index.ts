@@ -10,6 +10,7 @@ import * as rp from "request-promise-native"
 const requestProgress = require("request-progress")
 
 import { BuildCache } from "./BuildCache"
+import * as Install from "./Install"
 
 const argv = minimist(process.argv.slice(2))
 
@@ -56,17 +57,25 @@ if (argv._[0] === "path") {
         const packagePath = getPackageFromInfo(info)
         const fileName = getDownloadFileName(info)
 
-        const file = fs.createWriteStream(path.join(cacheDirectory, fileName))
+        const filePath = path.join(cacheDirectory, fileName)
+        const file = fs.createWriteStream(filePath)
 
         requestProgress(request(packagePath))
             .on("progress", (state: any) => {
                 console.log("Download progress: " + state.percent)
             })
-            .on("finish", () => {
+            .on("end", async () => {
                 console.log("Download complete!")
-                // buildCache.setBuildInfo(buildName, {
 
-                // })
+                const dir = path.join(cacheDirectory, buildName)
+                mkdirp.sync(dir)
+
+                console.log("Unpacking...")
+                const finalPath = await Install.windows(filePath, dir)
+                console.log("Unpack complete!")
+                buildCache.setBuildInfo(buildName, {
+                    filePath: finalPath,
+                })
             })
             .pipe(file)
     })()
