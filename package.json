@@ -1,11 +1,14 @@
 {
   "name": "oni-version-manager",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Command line utility to help with managing Oni versions, for automation.",
   "main": "lib/index.js",
   "bin": {
     "ovm": "cli/bin.js"
   },
+  "files": [
+    "lib"
+  ],
   "repository": "https://github.com/onivim/oni-version-manager.git",
   "author": "Bryan Phelps <bryphe@outlook.com>",
   "license": "MIT",
