@@ -10,12 +10,16 @@ const targz = require("targz")
 import * as cp from "child_process"
 import * as shell from "shelljs"
 
-export const finalize = async (downloadedFilePath: string, destPath: string): Promise<string> => {
+export const finalize = async (
+    downloadedFilePath: string,
+    destPath: string,
+    version: string,
+): Promise<string> => {
     switch (os.platform()) {
         case "win32":
             return windows(downloadedFilePath, destPath)
         case "linux":
-            return linux(downloadedFilePath, destPath)
+            return linux(downloadedFilePath, destPath, version)
         case "darwin":
             return darwin(downloadedFilePath, destPath)
         default:
@@ -38,7 +42,8 @@ const windows = async (zipPath: string, destPath: string): Promise<string> => {
     })
 }
 
-const linux = async (tarPath: string, destPath: string): Promise<string> => {
+const linux = async (tarPath: string, destPath: string, version: string): Promise<string> => {
+    const filePath = `Oni-${version}-x64-linux`
     return new Promise<string>((res, rej) => {
         targz.decompress(
             {
@@ -51,7 +56,7 @@ const linux = async (tarPath: string, destPath: string): Promise<string> => {
                     return
                 }
 
-                res(path.join(destPath, "oni"))
+                res(path.join(destPath, filePath, "oni"))
             },
         )
     })

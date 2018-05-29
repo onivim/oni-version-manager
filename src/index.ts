@@ -87,7 +87,7 @@ if (argv._[0] === "path") {
                 mkdirp.sync(dir)
 
                 console.log("Unpacking...")
-                const finalPath = await Install.finalize(filePath, dir)
+                const finalPath = await Install.finalize(filePath, dir, info.version)
                 console.log("Unpack complete!")
 
                 console.log("Cleaning up downloaded file...")
