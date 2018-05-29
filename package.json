@@ -28,12 +28,15 @@
     "@types/mkdirp": "^0.5.2",
     "@types/request": "^2.47.0",
     "@types/request-promise-native": "^1.0.14",
+    "@types/shelljs": "^0.8.0",
     "extract-zip": "^1.6.7",
     "github-releases": "^0.4.1",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "request": "^2.87.0",
     "request-progress": "^3.0.0",
-    "request-promise-native": "^1.0.5"
+    "request-promise-native": "^1.0.5",
+    "shelljs": "^0.8.2",
+    "targz": "^1.0.1"
   }
 }

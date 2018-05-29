@@ -1,5 +1,6 @@
 import * as minimist from "minimist"
 import * as fs from "fs"
+import * as os from "os"
 import * as https from "https"
 import * as path from "path"
 import * as mkdirp from "mkdirp"
@@ -44,11 +45,26 @@ if (argv._[0] === "path") {
     const buildName = argv._[1]
 
     const getPackageFromInfo = (info: any) => {
-        return info.packages.windows.zip
+        if (os.platform() === "win32") {
+            return info.packages.windows.zip
+        } else if (os.platform() === "darwin") {
+            return info.packages.darwin.dmg
+        } else if (os.platform() === "linux") {
+            return info.packages.linux.tar
+        }
     }
 
     const getDownloadFileName = (info: any) => {
-        return "temp.zip"
+        switch (os.platform()) {
+            case "win32":
+                return "win.zip"
+            case "darwin":
+                return "darwin.dmg"
+            case "linux":
+                return "linux.tar.gz"
+            default:
+                throw new Error("Unknown platform")
+        }
     }
 
     const exec = (async () => {
@@ -71,8 +87,12 @@ if (argv._[0] === "path") {
                 mkdirp.sync(dir)
 
                 console.log("Unpacking...")
-                const finalPath = await Install.windows(filePath, dir)
+                const finalPath = await Install.finalize(filePath, dir)
                 console.log("Unpack complete!")
+
+                console.log("Cleaning up downloaded file...")
+                fs.unlinkSync(filePath)
+                console.log("Cleanup complete!")
                 buildCache.setBuildInfo(buildName, {
                     filePath: finalPath,
                 })
