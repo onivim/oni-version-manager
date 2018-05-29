@@ -15,17 +15,18 @@ ovm develop /path/to/root/development/folder
 ovm uninstall [VERSION]
 ovm install [VERSION]
 
-ovm path [VERSION]
+ovm path [VERSION / develop]
 ```
 
 The `VERSION` can be:
-- `latest` - this will get the latest GitHub release binaries.
+
+-   `latest` - this will get the latest GitHub release binaries.
 
 And later, it'd be nice to have:
-- The ability to specify a tag, like `ovm v0.3.4`
-- The ability to specify a branch, like `ovm master`
+
+-   The ability to specify a tag, like `ovm v0.3.4`
+-   The ability to specify a branch, like `ovm master`
 
 The `install` command will grab the Oni binaries in a local cache.
 
 The `path` command will return the path to the Oni binaries, or an error if it has not been installed.
-
