@@ -7,16 +7,6 @@ matrix:
     sudo: required
     dist: trusty
     node_js: 8
-addons:
-  apt:
-    packages:
-    - libxkbfile-dev
-    - libgnome-keyring-dev
-    - icnsutils
-    - graphicsmagick
-    - xz-utils
-    - rpm
-    - bsdtar
 install:
 - npm install -g yarn
 - yarn install
