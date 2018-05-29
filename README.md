@@ -1,5 +1,7 @@
 # oni-version-manager
 
+[![Build Status](https://travis-ci.org/onivim/oni-version-manager.svg?branch=master)](https://travis-ci.org/onivim/oni-version-manager) [![npm version](https://img.shields.io/npm/v/oni-version-manager.svg)](https://www.npmjs.com/package/oni-version-manager)
+
 ## Command-line utility for managing Oni versions
 
 ### Description
