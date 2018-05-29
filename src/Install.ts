@@ -17,6 +17,8 @@ export const finalize = async (downloadedFilePath: string, destPath: string): Pr
             return linux(downloadedFilePath, destPath)
         case "darwin":
             return darwin(downloadedFilePath, destPath)
+        default:
+            throw new Error("Unknown platform: " + os.platform())
     }
 }
 
@@ -54,6 +56,19 @@ const linux = async (tarPath: string, destPath: string): Promise<string> => {
     })
 }
 
-export const osx = async (dmgPath: string, destPath: string): Promise<string> => {
-    cp.execSync(`hdiutil attach ${dmgPath}`)
+export const darwin = async (dmgPath: string, destPath: string): Promise<string> => {
+    const output = cp.execSync(`hdiutil attach ${dmgPath}`).toString("utf8")
+
+    const lines = output.split(os.EOL)
+
+    const [oniLine] = lines.filter(l => l.indexOf("Oni") >= 0)
+
+    const info = oniLine.split("/t")
+    const mountRoot = info[0]
+    const directory = info[info.length - 1]
+
+    console.log("DMG mount name: " + mountRoot)
+    console.log("DMG mount path: " + directory)
+
+    return Promise.resolve("")
 }
