@@ -8,6 +8,7 @@ import * as mkdirp from "mkdirp"
 import * as extract from "extract-zip"
 const targz = require("targz")
 import * as cp from "child_process"
+import * as shell from "shelljs"
 
 export const finalize = async (downloadedFilePath: string, destPath: string): Promise<string> => {
     switch (os.platform()) {
@@ -63,12 +64,19 @@ export const darwin = async (dmgPath: string, destPath: string): Promise<string>
 
     const [oniLine] = lines.filter(l => l.indexOf("Oni") >= 0)
 
-    const info = oniLine.split("/t")
+    const info = oniLine.split("\t")
     const mountRoot = info[0]
     const directory = info[info.length - 1]
 
     console.log("DMG mount name: " + mountRoot)
     console.log("DMG mount path: " + directory)
 
-    return Promise.resolve("")
+    const outputPath = path.join(destPath, "Oni.app")
+    mkdirp.sync(outputPath)
+    console.log("Copying mounted dmg...")
+    const output2 = cp.execSync(`cp -HR "${directory}/Oni.app/" "${outputPath}"`).toString("utf8")
+    console.log(output2)
+    console.log("Copying complete.")
+
+    return Promise.resolve(outputPath)
 }
