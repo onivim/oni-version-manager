@@ -83,5 +83,6 @@ export const darwin = async (dmgPath: string, destPath: string): Promise<string>
     console.log(output2)
     console.log("Copying complete.")
 
-    return Promise.resolve(outputPath)
+    const fullOutputPath = path.join(outputPath, "Contents", "MacOS", "Oni")
+    return Promise.resolve(fullOutputPath)
 }
