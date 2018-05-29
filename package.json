@@ -1,6 +1,6 @@
 {
   "name": "oni-version-manager",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Command line utility to help with managing Oni versions, for automation.",
   "main": "lib/index.js",
   "bin": {
