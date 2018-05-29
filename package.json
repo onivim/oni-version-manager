@@ -3,8 +3,22 @@
   "version": "0.0.1",
   "description": "Command line utility to help with managing Oni versions, for automation.",
   "main": "lib/index.js",
+  "bin": {
+    "ovm": "cli/bin.js"
+  },
   "repository": "https://github.com/onivim/oni-version-manager.git",
   "author": "Bryan Phelps <bryphe@outlook.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "scripts": {
+    "precommit": "pretty-quick --staged",
+    "build": "tsc",
+    "launch": "node lib/index.js"
+  },
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "prettier": "^1.13.2",
+    "pretty-quick": "^1.6.0",
+    "typescript": "^2.8.3"
+  }
 }
